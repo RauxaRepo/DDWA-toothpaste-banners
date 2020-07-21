@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title></title>
+  <meta name="ad.size" content="width=320,height=50">
+  <script type="text/javascript">
+    var clickTag = "https://www.google.com/";
+  </script>
+  <script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_2.0.1_min.js"></script>
+  <style type="text/css">
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    * {
+      padding: 0;
+    }
+
+    .container {
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      display: none;
+      z-index: 1;
+    }
+
+    .banner-content.banner-content--active {
+      opacity: 1;
+      display: block;
+    }
+
+    .b-320x50 {
+      width: 320px;
+      height: 50px;
+      padding: 0;
+    }
+
+    /*CTA BTN*/
+    .btn-container {
+      width: 320px;
+      height: 50px;
+      background-color: transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 100;
+      cursor: pointer;
+    }
+
+    .btn {
+      width: 171px;
+      height: 43px;
+      background-color: #149ab6;
+      margin-bottom: 145px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+    }
+
+    .frame.frame-1 {
+      z-index: 1;
+      background-image: url('./images/DDWA_I&F_toothpaste_320x50_h1.png');
+      background-size: 320px 50px;
+    }
+
+    .frame.frame-2 {
+      z-index: 1;
+      background-image: url('./images/DDWA_I&F_toothpaste_320x50_h2.png');
+      background-size: 320px 50px;
+    }
+
+
+    .banner-border {
+      position: absolute;
+      width: 318px;
+      height: 48px;
+      border: 1px solid #149ab6;
+      pointer-events: none;
+      z-index: 3;
+      top: 0px;
+      left: 0px;
+    }
+
+    .exit {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+    }
+  </style>
+  <script type="text/javascript" charset="utf-8">
+    document.addEventListener("DOMContentLoaded", function (e) {
+      // variables
+      var loadedImage = 0;
+      var images = [];
+      var exit = document.querySelector('.exit');
+      var bannerContent = document.querySelector('.banner-content');
+      var mainContainer = document.querySelector('.frame-1');
+
+      var bannerConfig = {
+        width: 320,
+        height: 50
+      }
+
+      // animating elements
+      var head1 = document.querySelector('.frame-1');
+      var head2 = document.querySelector('.frame-2');
+
+      var bannerTL;
+
+      function bannerAnimation() {
+
+        bannerTL = new TimelineMax({ paused: false });
+        bannerTL
+          .to(head1, 1, { y: '+=100', ease: Circ.easeOut }, '+=4')
+          .from(head2, 1, { y: '-=100', ease: Circ.easeOut }, '-=1')
+          .to(head2, 1, { y: '-=100', ease: Circ.easeOut }, '+=4')
+          .to(head1, 1, { y: '-=100', ease: Circ.easeOut }, '-=1')
+          .to(head1, 1, { y: '+=100', ease: Circ.easeOut }, '+=4')
+          .to(head2, 1, { y: '+=100', ease: Circ.easeOut }, '-=1')
+          .to(head2, 1, { y: '-=100', ease: Circ.easeOut }, '+=4')
+
+        setTimeout(function () {
+          bannerTL.pause();
+        }, 15000)
+
+      }
+
+
+      function preload() {
+        images = [
+          './images/DDWA_I&F_toothpaste_320x50_F2_bg.png',
+          './images/DDWA_I&F_toothpaste_320x50_h1.png',
+          './images/DDWA_I&F_toothpaste_320x50_h2.png'
+        ];
+
+        for (var i = 0; i < images.length; i++) {
+          var imageObj = new Image();
+          imageObj.src = images[i];
+          imageObj.addEventListener("load", iLoad, false);
+        }
+      }
+
+      function iLoad() {
+        loadedImage++;
+        if (images.length == loadedImage) {
+          init();
+        }
+      }
+
+      function init() {
+
+        bannerContent.classList.add('banner-content--active');
+        bannerAnimation();
+
+      }
+
+      preload();
+    });
+  </script>
+
+<body>
+  <div id="container" class="container b-320x50" style="background-color: #43b024;">
+    <div class="banner-border"></div>
+    <a class="exit" href="javascript:window.open(window.clickTag)"></a>
+    <div class="banner-content">
+
+
+      <div class="frame frame-1"></div>
+      <div class="frame frame-2"></div>
+
+
+    </div>
+
+  </div>
+</body>
+
+</html>

@@ -6,10 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title></title>
   <meta name="ad.size" content="width=320,height=480">
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     var clickTag = "https://www.google.com/";
-  </script>
-  <script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_2.0.1_min.js"></script>
+  </script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <style type="text/css">
     body {
       padding: 0;
@@ -137,6 +137,13 @@
       var images = [];
       var exit = document.querySelector('.exit');
       var bannerContent = document.querySelector('.banner-content');
+      var clickTag = "https://www.google.com/"
+
+
+      exit.addEventListener('click', function () {
+        e.preventDefault();
+        window.open(clickTag, '_blank');
+      })
 
       var bannerConfig = {
         width: 320,
@@ -213,7 +220,8 @@
 <body>
   <div id="container" class="container b-320x480" style="background-color: #fff;">
     <div class="banner-border"></div>
-    <a class="exit" href="javascript:window.open(window.clickTag)"></a>
+
+    <a class="exit"></a>
     <div class="banner-content">
 
 
